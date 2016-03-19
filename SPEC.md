@@ -52,7 +52,7 @@ Request notifications, etc, are communicated to the client in two ways. The clie
   * `"msg": <error message if any, <action> of request if succeed>`
   * `"user": <user name of the request>`
   * `"phone"`
-  * `"nprop": <number of meetup proposals>
+  * `"nprop": <number of meetup proposals>`
   * `"prop1", "prop2", ...`: dictionaries representing meetup proposals. Each proposal has required fields of `"date"`, `"time"`, `"place"`, and optional fields of `"datedesc"`, `"timedesc"`, `"placedesc"`. 
 
 #### Contact the Buyer
