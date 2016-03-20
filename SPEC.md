@@ -29,7 +29,7 @@ The reply message consists of a JSON dictionary.
 
 ### Reply Message Samples
 * `{"msg": "Error: username password mismatch"}`
-* `{"msg": "", "user": "bowen", "phone": "3123456789", "nprop": 2, "prop1": {"date": "20160401", "time": "15:00", "place": "Outside Harper", "timedesc": "I have a class ending at 14:50, should be able to get there on time"}, "prop2": {"date": "20160402", "time": "14:00", "place": "Bowen's shrine"}}`
+* `{"msg": "reqnotif", "user": "bowen", "phone": "3123456789", "nprop": 2, "prop1": {"date": "20160401", "time": "15:00", "place": "Outside Harper", "timedesc": "I have a class ending at 14:50, should be able to get there on time"}, "prop2": {"date": "20160402", "time": "14:00", "place": "Bowen's shrine"}}`
 
 ## Structure Of The Remaining Document
 The remaining document specifies each specific type of requests and replies in the order of the wireframe (Jan 30 version, pdf in dropbox). 
@@ -42,7 +42,7 @@ The remaining document specifies each specific type of requests and replies in t
   * `<email>`
   * `<pwd>: <SHA-2 of password>`
 * Reply: 
-  * `"msg": <error message if any, empty string if succeeds>`
+  * `"msg": <error message if any, <action> of request if succeeds>`
  
 ### Log In: 
 Client sends this message to the server so that the server knows its device token and will be able to send notifications to this device. One user account can be associated with several device tokens. 
