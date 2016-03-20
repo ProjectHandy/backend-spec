@@ -1,7 +1,15 @@
 # Handy Backend API Specification (Experimental)
 
 ## Architecture
-The server maintains a database. Each time the client sends a request, the server receives a string and sends a string to the client. The server possibly queries and modifies the database. 
+The server has two processes. 
+* The first process listens on HTTP,
+processes requests from clients, accesses the database, sends replies
+to clients, _and sends
+[APNs](https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/ApplePushService.html)
+notifications to the clients via the second
+process_. This process consists of a controller part and a core part. The core part can be thought of as a Haskell function of type `(String, Database) -> (String, Database, Maybe Notification)`. The controller part listens on requests from clients. When the client sends a request, the controller receives a string, and calls the core part with the received string and the current database as input. When the core function returns, it sends the first return value to the user, updates the database with the second return value, and if the third return value is not `Nothing`, it requests the second process to send the notification. 
+* The second process listens for requests to send notifications. A [notification](https://github.com/notnoop/java-apns) is identified by two strings: the content of the message and the device token. 
+
 
 ## Message Format
 ### Incoming Message Format
@@ -22,6 +30,14 @@ The remaining document specifies each specific type of requests and replies in t
   * `<pwd>: <SHA-2 of password>`
 * Reply: 
   * `"msg": <error message if any, empty string if succeeds>`
+ 
+### Log In: 
+Client sends this message to the server so that the server knows its device token and will be able to send notifications to this device. One user account can be associated with several device tokens. 
+* Request: 
+  * `<action>: login`
+  * `<token>`
+* Reply: 
+  * `"msg"`
 
 ### Seller: 
 #### Post Book Information
