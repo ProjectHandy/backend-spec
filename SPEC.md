@@ -114,6 +114,7 @@ The process of searching a book can involve two types of actions. The first acti
   * `"msg"`
   * `"nbook"`: number of matching books
   * `"book1", "book2", ...`: dictionaries representing books. Each book has fields of `"title"`, `"author"`, `"isbn"`. 
+
 The second action provides the ISBN of a book, and requests selling information of such book. 
 * Request: 
   * `<action>`: buysearch
