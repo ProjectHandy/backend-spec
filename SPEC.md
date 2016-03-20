@@ -29,7 +29,8 @@ The reply message consists of a JSON dictionary.
 
 ### Reply Message Samples
 * `{"msg": "Error: username password mismatch"}`
-* `{"msg": "reqnotif", "user": "bowen", "phone": "3123456789", "nprop": 2, "prop1": {"date": "20160401", "time": "15:00", "place": "Outside Harper", "timedesc": "I have a class ending at 14:50, should be able to get there on time"}, "prop2": {"date": "20160402", "time": "14:00", "place": "Bowen's shrine"}}`
+  * Error messages begins with `Error`. 
+* `{"msg": "reqnotif", "id": 150, "buyer": "bowen", "phone": "3123456789", "nprop": 2, "prop1": {"date": "20160401", "time": "15:00", "place": "Outside Harper", "timedesc": "I have a class ending at 14:50, should be able to get there on time"}, "prop2": {"date": "20160402", "time": "14:00", "place": "Bowen's shrine"}}`
 
 ## Structure Of The Remaining Document
 The remaining document specifies each specific type of requests and replies in the order of the wireframe (Jan 30 version, pdf in dropbox). 
@@ -72,6 +73,7 @@ Client sends this message to the server so that the server knows its device toke
   * `<value7>: description of price offer, string`
 * Reply fields: 
   * `"msg": <error message if any, <action> of request if succeed>`
+  * `"id": an integer identifying the selling item`
 
 #### Get Request Notification
 Request notifications, etc, are communicated to the client in two ways. The client can actively query the server for the new data if any, like specified in this section. When new data is available for the user (new request notifications, etc), the server also uses [Apple Push Notification Service](https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/ApplePushService.html) to push the data to the user, which I didn't expect and will figure out this more. 
@@ -79,16 +81,47 @@ Request notifications, etc, are communicated to the client in two ways. The clie
   * `<action>: reqnotif`
 * Reply: the request can fail, e.g., because the user has not registered. In the case of failure, the reply dict only consists of the first entry. Request notifications for each purchase request are only sent once, i.e., if someone requested a user's book and the that client asks the server for if anyone requested his books for the first time, the server replies with the details of the request. When the client asks the server for the second time, the server does not reply with the same information again. 
   * `"msg": <error message if any, <action> of request if succeed>`
-  * `"user": <user name of the request>`
+  * `"id": <the ID of the selling item>`
+  * `"buyer": <user name of the buyer>`
   * `"phone"`
   * `"nprop": <number of meetup proposals>`
   * `"prop1", "prop2", ...`: dictionaries representing meetup proposals. Each proposal has required fields of `"date"`, `"time"`, `"place"`, and optional fields of `"datedesc"`, `"timedesc"`, `"placedesc"`. 
 
 #### Contact the Buyer
-TBD
+The contact messages of seller and buyer to negotiate a meetup time have the action type `propose`. After the seller receives a request notification from a buyer, the seller picks a proposal and put it in the action `propose`. If the seller likes none of the proposals, he can propose other proposals. For example, a procedure can be like: 
+* buyer: time 1, time 2, time 3
+* seller: time 4, time 5, time 6, desc: Sorry I'm available on none of the time slots! 
+* buyer: time 5
+* seller: time 5 // OK, see you then! 
+
+In general, the proposal is determined iff the buyer and seller has only one time slot in their proposals in the last round of communication and their proposal agrees. 
+* Request: 
+  * `<action>: propose`
+  * `<id>: <the ID of the selling item>`
+  * `<buyer>: <user name of the buyer>`
+  * `<nprops>: <number of meetup proposals>`
+  * `<prop1>, <prop2>, ...`: same as the reply of `reqnotif`
+* Reply: 
+  * `"msg"`
 
 ### Buyer: 
 #### Search Book
-TBD
+The process of searching a book can involve two types of actions. The first action provides a string indicating the book, like specifying its book name, author, ISBN, etc, and requests the detailed information of that book. 
+* Request: 
+  * `<action>: matchbook`
+  * `<indicator>`: a string indicating the book. 
+* Reply: 
+  * `"msg"`
+  * `"nbook"`: number of matching books
+  * `"book1", "book2", ...`: dictionaries representing books. Each book has fields of `"title"`, `"author"`, `"isbn"`. 
+The second action provides the ISBN of a book, and requests selling information of such book. 
+* Request: 
+  * `<action>`: buysearch
+  * `<isbn>`
+* Reply: 
+  * `"msg"`
+  * `"nitem"`: number of items of selling information
+  * `"item1", "item2", ...`: dictionaries representing selling information. Each item has required fields of `"isbn"`, `"notes"`, `"paper"`, `"price"`, and optional fields of `"notesdesc"`, `"paperdesc"`, `"pricedesc"`, which is the same as the request fields in `postbookinfo`. 
+
 #### Contact the Seller
-TBD
+See section "Contact the Buyer". 
