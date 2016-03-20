@@ -76,7 +76,12 @@ Client sends this message to the server so that the server knows its device toke
   * `"id": an integer identifying the selling item`
 
 #### Get Request Notification
-Request notifications, etc, are communicated to the client in two ways. The client can actively query the server for the new data if any, like specified in this section. When new data is available for the user (new request notifications, etc), the server also uses [Apple Push Notification Service](https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/ApplePushService.html) to push the data to the user, which I didn't expect and will figure out this more. 
+Request notifications, etc, are communicated to the client in two
+ways. The client can actively query the server for the new data if
+any, like specified in this section. When new data is available for
+the user (new request notifications, etc), the server also uses
+[Apple Push Notification Service](https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/ApplePushService.html)
+to push the data to the user. 
 * Request: 
   * `<action>: getprop`
 * Reply: the request can fail, e.g., because the user has not registered. In the case of failure, the reply dict only consists of the first entry. Request notifications for each purchase request are only sent once, i.e., if someone requested a user's book and the that client asks the server for if anyone requested his books for the first time, the server replies with the details of the request. When the client asks the server for the second time, the server does not reply with the same information again. 
@@ -85,18 +90,20 @@ Request notifications, etc, are communicated to the client in two ways. The clie
   * `"buyer": <user name of the buyer>`
   * `"phone"`
   * `"props"`: array of dictionaries representing meetup proposals. Each proposal has required fields of `"date"`, `"time"`, `"place"`, and optional fields of `"datedesc"`, `"timedesc"`, `"placedesc"`. 
-* Optional Reply Fields: 
-  * `"chat"`: chat message
+* Optional Reply Fields: same as the request of propose. 
 
 #### Contact the Buyer
 The contact messages of seller and buyer to negotiate a meetup time have the action type `propose`. After the seller receives a request notification from a buyer, the seller picks a proposal and put it in the action `propose`. If the seller likes none of the proposals, he can propose other proposals. For example, a procedure can be like: 
 * buyer: time 1, time 2, time 3
-* seller: time 4, time 5, time 6, desc: Sorry I'm available on none of the time slots! 
+* seller: time 4, time 5 = 15:00, time 6, desc: Sorry I'm available on none of the time slots! 
 * buyer: time 5
 * seller: time 5 // OK, see you then! 
 * ... some time later, right before time 5
 * buyer: time 5, chat: I'm almost there. 
-  * `propose?id=834&buyer=alice&nprops=1&prop
+  * `propose?{"user": "alice", "pwd": "398r", "id": 834, "buyer":
+    "alice", "phone": "3123456789", "props":
+    [{"date": "20160401", "time": "15:00", "place": "UCPD"}], "chat":
+    "I'm almost there."}`
 * seller: time 5, chat: I'm waiting. I have a book in my hand. 
 * buyer: time 5, chat: I see you. 
 
@@ -106,7 +113,7 @@ In general, the proposal is determined iff the buyer and seller has only one tim
   * `<id>: <the ID of the selling item>`
   * `<buyer>: <user name of the buyer>`
   * `<phone>`
-  * `"props"`: same as the reply of `reqnotif`
+  * `"props"`: same as the reply of `getprop`
 * Optional Request Fields: 
   * `"chat"`: string of chat message
   * `"control"`: array of strings represent control information. `completed` means transaction completed. `withdraw` means the transaction is withdrawn. 
