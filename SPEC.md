@@ -79,10 +79,15 @@ Client sends this message to the server so that the server knows its device toke
   * `"id": an integer identifying the selling item`
 
 #### Get Request Notification
-Request notifications, etc, are communicated to the client in two ways. The client can actively query the server for the new data if any, like specified in this section. When new data is available for the user (new request notifications, etc), the server also uses [Apple Push Notification Service](https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/ApplePushService.html) to push the data to the user, which I didn't expect and will figure out this more. 
+Request notifications, etc, are communicated to the client in two
+ways. The client can actively query the server for the new data if
+any, like specified in this section. When new data is available for
+the user (new request notifications, etc), the server also uses
+[Apple Push Notification Service](https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/ApplePushService.html)
+to push the data to the user. 
 * Request: 
   * `<action>: getprop`
-* Reply: the request can fail, e.g., because the user has not registered. In the case of failure, the reply dict only consists of the first entry. Request notifications for each purchase request are only sent once, i.e., if someone requested a user's book and the that client asks the server for if anyone requested his books for the first time, the server replies with the details of the request. When the client asks the server for the second time, the server does not reply with the same information again. 
+* Reply: the request can fail, e.g., because the user has not registered. In the case of failure, the reply dict only consists of the first entry. Request notifications for each purchase request are only sent once, i.e., if someone requested a user's book and that client asks the server "if anyone requested his books" for the first time, the server replies with the details of the request. When the client asks the server for the second time, the server does not reply with the same information again. 
   * `"msg": <error message if any, <action> of request if succeed>`
   * `"id": <the ID of the selling item>`
   * `"buyer": <user name of the buyer>`
