@@ -18,9 +18,18 @@ process_. This process consists of a controller part and a core part. The core p
 ## Message Format
 ### Incoming Message Format
 The incoming message consists of a word indicating the action the client wishes the server to perform and several key-value pairs that specifies the action. An incoming message can in general be represented as `<action>?<user>=<username>&<pwd>=<SHA-1 of password>&<key1>=<value1>&<key2>=<value2>&...&<keyn>=<valuen>`. To make sure the keys and values does not contain '?' and '=', we escape them in the messages and the server needs to [unescape](http://hackage.haskell.org/package/network-2.1.0.0/docs/Network-URI.html#v%3AunEscapeString) them. 
+### Incoming Message Samples
+* `register?user=cggong&email=cggong%40uchicago.edu&pwd=329fjmsdjsdmfsd`
+* `login?user=cggong&pwd=23rujewfmis0&token=osfj0jf02imfeowfsd`
+* `postbookinfo?user=cggong&pwd=sfdinu9i323&isbn=9783249237&notes=3&price=6.3&notesdesc=Some+notes+taken%2C+but+acceptable+%3A%29`
+  * The `notesdesc` field is the string `"Some notes taken, but acceptable :)"`.
 
 ### Reply Message Format
 The reply message consists of a JSON dictionary.
+
+### Reply Message Samples
+* `{"msg": "Error: username password mismatch"}`
+* `{"msg": "", "user": "bowen", "phone": "3123456789", "nprop": 2, "prop1": {"date": "20160401", "time": "15:00", "place": "Outside Harper", "timedesc": "I have a class ending at 14:50, should be able to get there on time"}, "prop2": {"date": "20160402", "time": "14:00", "place": "Bowen's shrine"}}`
 
 ## Structure Of The Remaining Document
 The remaining document specifies each specific type of requests and replies in the order of the wireframe (Jan 30 version, pdf in dropbox). 
