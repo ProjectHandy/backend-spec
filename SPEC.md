@@ -99,12 +99,14 @@ to push the data to the user.
 #### Contact the Buyer
 The contact messages of seller and buyer to negotiate a meetup time have the action type `propose`. After the seller receives a request notification from a buyer, the seller picks a proposal and put it in the action `propose`. If the seller likes none of the proposals, he can propose other proposals. For example, a procedure can be like: 
 * buyer: time 1, time 2, time 3
-* seller: time 4, time 5, time 6, desc: Sorry I'm available on none of the time slots! 
+* seller: time 4, time 5 = 15:00, time 6, desc: Sorry I'm available on none of the time slots! 
 * buyer: time 5
 * seller: time 5 // OK, see you then! 
 * ... some time later, right before time 5
 * buyer: time 5, chat: I'm almost there. 
-  * `propose?id=834&buyer=alice&nprops=1&prop
+  * `propose?{"id": 834, "buyer": "alice", "props":
+    [{"date": "20160401", "time": "15:00", "place": "Reg"}], "chat":
+    "I'm almost there."}[`
 * seller: time 5, chat: I'm waiting. I have a book in my hand. 
 * buyer: time 5, chat: I see you. 
 
