@@ -20,7 +20,7 @@ process_. This process consists of a controller part and a core part. The core p
 The incoming message consists of a word indicating the action the client wishes the server to perform and several key-value pairs that specifies the action. An incoming message can in general be represented as `<action>?{"user": <username>, "pwd": <SHA-1 of password>, "key1": <value1>, "key2": <value2>, ..., "keyn": <valuen>}`. 
 ### Incoming Message Samples
 * `register?{"user": "cggong", "email": "cggong@uchicago.edu", "pwd": "329fjmsdjsdmfsd"}`
-* `login?{"user": "cggong", "pwd": "23rujewfmis0&token=osfj0jf02imfeowfsd"`
+* `login?{"user": "cggong", "pwd": "23rujewfmis0&token=osfj0jf02imfeowfsd"}`
 * `postbookinfo?{"user": "cggong", "pwd": "sfdinu9i323", "isbn": "9783249237", "notes": 3, "price": 6.3, "notesdesc": "Some notes taken, but acceptable :)"}`
   * The `notesdesc` field is the string `"Some notes taken, but acceptable :)"`.
 
@@ -106,7 +106,7 @@ The contact messages of seller and buyer to negotiate a meetup time have the act
 * buyer: time 5, chat: I'm almost there. 
   * `propose?{"id": 834, "buyer": "alice", "props":
     [{"date": "20160401", "time": "15:00", "place": "Reg"}], "chat":
-    "I'm almost there."}]`
+    "I'm almost there."}`
 * seller: time 5, chat: I'm waiting. I have a book in my hand. 
 * buyer: time 5, chat: I see you. 
 
