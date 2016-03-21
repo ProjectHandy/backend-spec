@@ -27,20 +27,21 @@ The remaining document specifies each specific type of requests and replies in t
 #### Post Book Information
 * Request: 
   * `<action>: postbookinfo`
-  * `<key1>, <value1>: "isbn", ISBN`
-  * `<key2>: notes`
-  * `<value2>: 0 lowest - 9 highest`
-  * `<key3>: paper`
-  * `<value3>: 0 - 9`
-  * `<key4>: price`
-  * `<value4>: decimal number`
+  * `<key1>, <valye1>: "bookname", name`
+  * `<key2>, <value2>: "isbn", ISBN`
+  * `<key3>: notes`
+  * `<value3>: 0 lowest - 9 highest`
+  * `<key4>: paper`
+  * `<value4>: 0 - 9`
+  * `<key5>: price`
+  * `<value5>: decimal number`
 * Optional Request Fields: 
-  * `<key5>: notesdesc`
-  * `<value5>: description of notes taken, string`
-  * `<key6>: paperdesc`
-  * `<value6>: description of paper quality, string`
-  * `<key7>: pricedesc`
-  * `<value7>: description of price offer, string`
+  * `<key6>: notesdesc`
+  * `<value6>: description of notes taken, string`
+  * `<key7>: paperdesc`
+  * `<value7>: description of paper quality, string`
+  * `<key8>: pricedesc`
+  * `<value8>: description of price offer, string`
 * Reply fields: 
   * `"msg": <error message if any, <action> of request if succeed>`
 
