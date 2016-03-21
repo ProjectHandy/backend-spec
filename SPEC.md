@@ -7,7 +7,15 @@ processes requests from clients, accesses the database, sends replies
 to clients, _and sends
 [APNs](https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/ApplePushService.html)
 notifications to the clients via the second
-process_. This process consists of a controller part and a core part. The core part can be thought of as a Haskell function of type `(String, Database) -> (String, Database, Maybe Notification)`. The controller part listens on requests from clients. When the client sends a request, the controller receives a string, and calls the core part with the received string and the current database as input. When the core function returns, it sends the first return value to the user, updates the database with the second return value, and if the third return value is not `Nothing`, it requests the second process to send the notification. 
+process_. This process consists of a controller part and a core
+part. The core part can be thought of as a Haskell function of type
+`(String, Database) -> (String, Database, Maybe Notification)`. The
+controller part listens on requests from clients. When the client
+sends a request, the controller receives an HTTP request, and calls
+the core part with a properly formatted input string (the format is
+specified in the "Incoming Message Format" section and the conversion
+process is specified in the "Implementation of Actual Transportation"
+section) and the current database as input. When the core function returns, it sends the first return value to the user, updates the database with the second return value, and if the third return value is not `Nothing`, it requests the second process to send the notification. 
 * The second process listens for requests to send notifications. A
   notification is identified by two strings: the content of the
   message and the device token. To implement this process, we can use
