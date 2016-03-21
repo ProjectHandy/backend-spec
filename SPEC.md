@@ -116,7 +116,7 @@ In general, the proposal is determined iff the buyer and seller has only one tim
   * `<id>: <the ID of the selling item>`
   * `<buyer>: <user name of the buyer>`
   * `<phone>`
-  * `"props"`: same as the reply of `reqnotif`
+  * `"props"`: same as the reply of `getprop`
 * Optional Request Fields: 
   * `"chat"`: string of chat message
   * `"control"`: array of strings represent control information. `completed` means transaction completed. `withdraw` means the transaction is withdrawn. 
