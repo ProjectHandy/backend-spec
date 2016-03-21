@@ -37,11 +37,11 @@ The reply message consists of a JSON dictionary.
 
 ### Reply Message Samples
 * `{"msg": "Error: username password mismatch"}`
-  * Error messages begins with `Error`. 
+  * Error messages begin with `Error`. 
 * `{"msg": "getprop", "id": 150, "buyer": "bowen", "phone": "3123456789", "props": [{"date": "20160401", "time": "15:00", "place": "Outside Harper", "timedesc": "I have a class ending at 14:50, should be able to get there on time"}, {"date": "20160402", "time": "14:00", "place": "Bowen's shrine"}]}`
 
 ## Implementation of Actual Transportation
-The client requests are HTTP POST requests like `http://serverdomain/register` with payload `{"user": "cggong", "email": "cggong@uchicago.edu", "pwd": "329fjmsdjsdmfsd"}`. The controller part is responsible for concatenating the request (with the `http://serverdomain/` part truncated away) with the payload separated by a `?`. The server replys are HTTP responses. 
+The client requests are HTTP POST requests like `http://serverdomain/register` with payload `{"user": "cggong", "email": "cggong@uchicago.edu", "pwd": "329fjmsdjsdmfsd"}`. The controller part is responsible for concatenating the request (with the `http://serverdomain/` part truncated away) with the payload separated by a `?`. The server replies are HTTP responses. 
 
 ## Structure Of The Remaining Document
 The remaining document specifies each specific type of requests and replies in the order of the wireframe (Jan 30 version, pdf in dropbox). 
