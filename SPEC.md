@@ -25,11 +25,11 @@ section) and the current database as input. When the core function returns, it s
 
 ## Message Format
 ### Incoming Message Format
-The incoming message consists of a word indicating the action the client wishes the server to perform and several key-value pairs that specifies the action. An incoming message can in general be represented as `<action>?{"user": <username>, "pwd": <SHA-1 of password>, "key1": <value1>, "key2": <value2>, ..., "keyn": <valuen>}`. 
+The incoming message consists of a word indicating the action the client wishes the server to perform and several key-value pairs that specifies the action. An incoming message can in general be represented as `<action>?{"user": <username>, "email": <email address>, "pwd": <SHA-1 of password>, "key1": <value1>, "key2": <value2>, ..., "keyn": <valuen>}`. 
 ### Incoming Message Samples
 * `register?{"user": "cggong", "email": "cggong@uchicago.edu", "pwd": "329fjmsdjsdmfsd"}`
-* `login?{"user": "cggong", "pwd": "23rujewfmis0&token=osfj0jf02imfeowfsd"}`
-* `postbookinfo?{"user": "cggong", "pwd": "sfdinu9i323", "isbn": "9783249237", "notes": 3, "price": 6.3, "notesdesc": "Some notes taken, but acceptable :)"}`
+* `login?{"user": "cggong", "email" : "cggong@uchicago.edu", "pwd": "23rujewfmis0&token=osfj0jf02imfeowfsd"}`
+* `postbookinfo?{"user": "cggong", "email" : "cggong@uchicago.edu", "pwd": "sfdinu9i323", "isbn": "9783249237", "notes": 3, "price": 6.3, "notesdesc": "Some notes taken, but acceptable :)"}`
   * The `notesdesc` field is the string `"Some notes taken, but acceptable :)"`.
 
 ### Reply Message Format
