@@ -116,8 +116,8 @@ The contact messages of seller and buyer to negotiate a meetup time have the act
 * seller: time 5 // OK, see you then! 
 * ... some time later, right before time 5
 * buyer: time 5, chat: I'm almost there. 
-  * `propose?{"id": 834, "buyer": "alice", "props":
-    [{"date": "20160401", "time": "15:00", "place": "Reg"}], "chat":
+  * `propose?{"id": "834", "buyer": "alice", "props":
+    "[{date: 20160401, time: 15:00, place: Reg}]", "chat":
     "I'm almost there."}`
 * seller: time 5, chat: I'm waiting. I have a book in my hand. 
 * buyer: time 5, chat: I see you. 
