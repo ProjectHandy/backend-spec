@@ -60,9 +60,12 @@ The remaining document specifies each specific type of requests and replies in t
 Client sends this message to the server so that the server knows its device token and will be able to send notifications to this device. One user account can be associated with several device tokens. 
 * Request: 
   * `<action>: login`
+  * `<user>: <user name>`
+  * `<email>`
+  * `<pwd>: <SHA-2 of password>`
   * `<token>`
 * Reply: 
-  * `"msg"`
+  * `"msg":  <error message if any, <action> of request if succeeds>`
 
 ### Seller: 
 #### Post Book Information
