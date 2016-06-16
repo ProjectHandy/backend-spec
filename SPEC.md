@@ -116,7 +116,7 @@ The contact messages of seller and buyer to negotiate a meetup time have the act
 * seller: time 5 // OK, see you then! 
 * ... some time later, right before time 5
 * buyer: time 5, chat: I'm almost there. 
-  * `propose?{"id": "834", "buyer": "alice", "props":
+  * `propose?{"id": "834", "buyer": "alice", "seller": "bob", "buyerToSeller" : "true", "props":
     "[{date: 20160401, time: 15:00, place: Reg}]", "chat":
     "I'm almost there."}`
 * seller: time 5, chat: I'm waiting. I have a book in my hand. 
@@ -126,7 +126,9 @@ In general, the proposal is determined iff the buyer and seller has only one tim
 * Request: 
   * `<action>: propose`
   * `<id>: <the ID of the selling item>`
-  * `<buyer>: <user name of the buyer>`
+  * `<buyer>: <email of the buyer>`
+  * `<seller>: <email of the seller>`
+  * `<buyerToSeller>: a boolean value which indicates the message is from buyer to seller if it is true and from seller to buyer otherwise
   * `<phone>`
   * `"props"`: same as the reply of `getprop`
 * Optional Request Fields: 
